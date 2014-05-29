@@ -1,3 +1,4 @@
+require 'scraperwiki'
 # Based on template by pezholio see blog at http://bit.ly/15eqyPz
 require 'nokogiri'
 require 'mechanize'
