@@ -10,7 +10,7 @@ require 'yaml'
 url = "http://ratings.food.gov.uk/OpenDataFiles/FHRS870en-GB.xml"
 # See blog for more details of how to find the url for a specific council 
 # Both date lines below modified from template by adding rescue nil to cover situation when date is blank
-# Moved to morph.io 29-May-2015
+# Moved to morph.io 29-May-2014
 # Modified to skip records for Exempt premises and those Awaiting Inspection
 
 doc = Nokogiri::XML open(url)
