@@ -1,0 +1,5 @@
+Based on template by @pezholio  "link":https://scraperwiki.com/scrapers/food_safety_inspections_scraper_template/ an earlier version of which is mentioned in one of the ScraperWiki intro training videos.
+
+In looking for more info on error handling (as below) I found this excellent blog by @Pezolio at "link":http://bit.ly/15eqyPz 
+
+When I first ran it I ran into problems with the scraper falling over due to invalid dates. Actually blank dates as Milton Keynes Council include data for premises they have yet to inspect. After a number of attempts I seem to have dealt with this for now by adding 
