@@ -10,6 +10,8 @@ require 'yaml'
 url = "http://ratings.food.gov.uk/OpenDataFiles/FHRS870en-GB.xml"
 # See blog for more details of how to find the url for a specific council 
 # Both date lines below modified from template by adding rescue nil to cover situation when date is blank
+# Moved to morph.io 29-May-2015
+# Modified to skip records for Exempt premises and those Awaiting Inspection
 
 doc = Nokogiri::XML open(url)
 
@@ -23,14 +25,17 @@ doc.search('EstablishmentDetail').each do |i|
 end
 
 inspections.each do |i|
+    if i["RatingValue"] == "Exempt"
+      puts "skipping: Exempt id: " + i["FHRSID"] + "Name: " + i["BusinessName"]
+      # skip
+   elsif i["RatingValue"] == "AwaitingInspection"
+      puts "skipping: Awaiting Inspection id: " + i["FHRSID"] + "Name: " + i["BusinessName"]
+      # skip
+   else   
     details = {}
     details[:id] = i["FHRSID"]
     details[:councilid] = i["LocalAuthorityBusinessID"]
-    if i["RatingDate"][0 ,3] == "201"
-       detail[:date] = ""
-    else
-       details[:date] = Date.parse(i["RatingDate"]) rescue nil
-    end
+    details[:date] = Date.parse(i["RatingDate"]) rescue nil
     details[:name] = i["BusinessName"]
     details[:link] = "http://ratings.food.gov.uk/business/en-GB/#{details[:id]}"
     address = [i["AddressLine1"], i["AddressLine2"], i["AddressLine3"], i["AddressLine4"], i["PostCode"]].compact.reject { |s| s.empty? }
@@ -43,4 +48,5 @@ inspections.each do |i|
     details[:lng] = i["lng"]
     
     ScraperWiki.save(["id"], details)
+   end
 end
