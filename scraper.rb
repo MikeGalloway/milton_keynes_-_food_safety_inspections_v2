@@ -26,7 +26,11 @@ inspections.each do |i|
     details = {}
     details[:id] = i["FHRSID"]
     details[:councilid] = i["LocalAuthorityBusinessID"]
-    details[:date] = Date.parse(i["RatingDate"]) rescue nil
+    if i["RatingDate"][0 ,3] == "201"
+       detail[:date] = ""
+    else
+       details[:date] = Date.parse(i["RatingDate"]) rescue nil
+    end
     details[:name] = i["BusinessName"]
     details[:link] = "http://ratings.food.gov.uk/business/en-GB/#{details[:id]}"
     address = [i["AddressLine1"], i["AddressLine2"], i["AddressLine3"], i["AddressLine4"], i["PostCode"]].compact.reject { |s| s.empty? }
