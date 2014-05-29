@@ -3,3 +3,6 @@ Based on template by @pezholio  "link":https://scraperwiki.com/scrapers/food_saf
 In looking for more info on error handling (as below) I found this excellent blog by @Pezolio at "link":http://bit.ly/15eqyPz 
 
 When I first ran it I ran into problems with the scraper falling over due to invalid dates. Actually blank dates as Milton Keynes Council include data for premises they have yet to inspect. After a number of attempts I seem to have dealt with this for now by adding 
+
+28-May-2014
+Modified on moving to morph.io to exclude records for Exempt premises and those Awaiting Inspection
